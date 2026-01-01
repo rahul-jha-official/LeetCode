@@ -20,26 +20,25 @@ O(1) extra space — no additional data structures are used except for the outpu
 
 # Code
 ```csharp []
-public class Solution {
-    public int[] PlusOne(int[] digits) 
+public class Solution
+{
+    public int[] PlusOne(int[] digits)
     {
-        int carry = 1;
+        //Keeping carry as 1 to add one to the last digit
+        var carry = 1;
+
         for (int i = digits.Length - 1; i >= 0; i--)
         {
-            int n = digits[i] + carry;
-            digits[i] = n % 10;
-            carry = n / 10;
+            var sum = carry + digits[i];
+            digits[i] = sum % 10;
+            carry = sum / 10;
         }
-        if (carry > 0)
+
+        if (carry != 0)
         {
-            var newDigits = new int[digits.Length + 1];
-            newDigits[0] = carry;
-            for (int i = 0; i < digits.Length; i++)
-            {
-                newDigits[i + 1] = digits[i];
-            }
-            digits = newDigits; 
+            return [carry, .. digits];
         }
+
         return digits;
     }
 }
